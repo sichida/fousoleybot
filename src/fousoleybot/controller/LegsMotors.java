@@ -1,0 +1,42 @@
+package fousoleybot.controller;
+
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.MotorPort;
+import lejos.robotics.RegulatedMotor;
+import lejos.utility.Delay;
+
+public class LegsMotors {
+	private RegulatedMotor left ;
+	private RegulatedMotor right;
+	
+	public LegsMotors() {
+		left = new EV3LargeRegulatedMotor(MotorPort.B);
+	    right = new EV3LargeRegulatedMotor(MotorPort.C);	
+	}
+	
+	public void startSynchronizeLegs() {
+		left.synchronizeWith(new RegulatedMotor[] {right});
+		left.startSynchronization();
+	}
+	
+	public void stopSynchronizedLegs() {
+		left.endSynchronization();
+		right.endSynchronization();
+	}
+	
+	public void moveForward(int delay) {
+		this.startSynchronizeLegs();
+		
+		left.forward();
+		right.forward();
+		
+		this.stopSynchronizedLegs();
+			
+		Delay.msDelay(delay);
+		
+		left.stop(true);
+		right.stop(true);
+		
+	}
+    
+}
