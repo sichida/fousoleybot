@@ -1,5 +1,6 @@
 package fousoleybot;
 import fousoleybot.controller.LegsMotors;
+import fousoleybot.controller.LethalArm;
 import fousoleybot.sensor.ColorSensor;
 import fousoleybot.sensor.RGBColor;
 import fousoleybot.sensor.SonarSensor;
@@ -12,15 +13,27 @@ public class Main {
 		LCD.drawString("-= FousoleyBot =-", 1, 0);
 		LCD.drawString("Initializing", 1, 2);
 		
-		ColorSensor colorSensor = new ColorSensor();
-	    SonarSensor sonarSensor = new SonarSensor();
+/*		ColorSensor colorSensor = new ColorSensor();
+	    
 	    LegsMotors legs = new LegsMotors();
-	    TouchSensor touchSensor = new TouchSensor();
+*/	    
+		SonarSensor sonarSensor = new SonarSensor();
+		TouchSensor touchSensor = new TouchSensor();
+		LethalArm lethalArm = new LethalArm();
 
 		LCD.clear();
 		LCD.drawString("-= FousoleyBot =-", 1, 0);
+		while (true) {
+			if (touchSensor.isTouched()) {
+				lethalArm.shootUp();
+			}
+			float d = sonarSensor.getDistance();
+			if (d > 1 && d <= 8.0) {
+				return;
+			}
+		}
 		
-		RGBColor colors = colorSensor.getColor();
+/*		RGBColor colors = colorSensor.getColor();
 	    legs.moveForward();
 	    
 		while(!touchSensor.isTouched()) {
@@ -31,11 +44,12 @@ public class Main {
 		    LCD.drawString("B: " + colors.getB(), 1, 4);
 		    
 		    LCD.drawString("d before: " + sonarSensor.getDistance(), 1, 6);
-		
-		    LCD.drawString("d after: " + sonarSensor.getDistance(), 1, 7);
 		    colors = colorSensor.getColor();
+		    if(sonarSensor.getDistance() < 40.f) {
+		    	lethalArm.shot();
+		    }
 		}
-		legs.stop();
-		Button.waitForAnyPress();
+		legs.stop();*/
+		//Button.waitForAnyPress();
 	}
 }

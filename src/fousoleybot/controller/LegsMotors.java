@@ -42,7 +42,7 @@ public class LegsMotors {
 		this.startSynchronizeLegs();
 
 		left.backward();
-		right.backward();
+		right.backward();		
 
 		this.stopSynchronizedLegs();
 
