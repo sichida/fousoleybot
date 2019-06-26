@@ -3,20 +3,23 @@ package fousoleybot.sensor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorMode;
+import lejos.robotics.Color;
+import lejos.robotics.ColorIdentifier;
 
 public class ColorSensor {
 	private SensorMode brightnessSensorMode;
+	private EV3ColorSensor colorSensor;
 
 	public ColorSensor() {
-		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S3);
-		colorSensor.setFloodlight(false);
-	    brightnessSensorMode = colorSensor.getRGBMode();
+		colorSensor = new EV3ColorSensor(SensorPort.S3);
+		colorSensor.setFloodlight(true);
+		brightnessSensorMode = colorSensor.getColorIDMode();
 	}
 
-	public RGBColor getColor() {
+	public ColorEnum getColor() {
 		float[] colors = new float[brightnessSensorMode.sampleSize()];
-	    brightnessSensorMode.fetchSample(colors, 0);
-	    return new RGBColor(colors[0], colors[1], colors[2]);
+		brightnessSensorMode.fetchSample(colors, 0);
+		return ColorEnum.fromColorId(colorSensor.getColorID());
 	}
-	
+
 }

@@ -20,4 +20,8 @@ public class LethalArm extends ArmMotor{
 		Delay.msDelay(500);		
 		this.getArm().stop(true);
 	}
+	
+	public void waitComplete() {
+		this.getArm().waitComplete();
+	}
 }

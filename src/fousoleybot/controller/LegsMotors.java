@@ -74,5 +74,24 @@ public class LegsMotors {
 
 		this.stopSynchronizedLegs();
 	}
+	
+	public void turn90Left() {
+		this.startSynchronizeLegs();
+		left.rotate(470);
+		right.rotate(- 470);
+		this.stopSynchronizedLegs();
+	}
+	
+	public void turn90Right() {
+		this.startSynchronizeLegs();
+		left.rotate(- 470);
+		right.rotate(470);
+		this.stopSynchronizedLegs();
+	}
+	
+	public void waitComplete() {
+		left.waitComplete();
+		right.waitComplete();
+	}
 
 }
