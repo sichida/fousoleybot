@@ -27,15 +27,15 @@ public class Main {
 			if (touchSensor.isTouched()) {
 				LCD.clear();
 				LCD.drawString("-= FousoleyBot =-", 1, 0);
-				LCD.drawString("color " + colorSensor.getColor().name(), 3, 1);
-//				LCD.drawString("color " + colorSensor.getColor().getG(), 3, 2);
-//				LCD.drawString("color " + colorSensor.getColor().getB(), 3, 3);
-				legs.turn90Left();
-				legs.waitComplete();
-				lethalArm.shootUp();
-				lethalArm.waitComplete();
-				legs.turn90Right();
-				legs.waitComplete();
+				LCD.drawString("color " + colorSensor.getColor().getRed(), 3, 1);
+				LCD.drawString("color " + colorSensor.getColor().getGreen(), 3, 2);
+				LCD.drawString("color " + colorSensor.getColor().getBlue(), 3, 3);
+//				legs.turn90Left();
+//				legs.waitComplete();
+//				lethalArm.shootUp();
+//				lethalArm.waitComplete();
+//				legs.turn90Right();
+//				legs.waitComplete();
 			}
 			float d = sonarSensor.getDistance();
 			if (d > 1 && d <= 8.0) {

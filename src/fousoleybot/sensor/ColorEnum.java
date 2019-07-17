@@ -11,6 +11,7 @@ public enum ColorEnum {
 	}
 
 	public static ColorEnum fromColorId(int colorID) {
+//		System.out.println("the color is : " + colorID);
 		switch (colorID) {
 		case 0:
 			return ColorEnum.RED;
